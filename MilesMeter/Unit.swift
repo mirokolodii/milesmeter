@@ -11,8 +11,40 @@ import Foundation
 
 class Unit {
     
+    let name: String
+    let aliases: [String]
+    let shortname: String
+    let isBase: Bool
+    let ratio: Int
+    let unitType: Int
+    let unitSystemId: Int
     
-    private let unitSystems = [
+    init(name: String, aliases: [String], shortname: String, isBase: Bool, ratio: Int, unitType: Int, unitSystemId: Int) {
+        
+        self.name = name
+        self.aliases = aliases
+        self.shortname = shortname
+        self.isBase = isBase
+        self.ratio = ratio
+        self.unitType = unitType
+        self.unitSystemId = unitSystemId
+        
+        
+    }
+
+    
+    static func getUnits() -> [Unit] {
+        var allUnits = [Unit]()
+        for unit in self.units {
+            let newUnit = Unit(name: unit["name"] as! String, aliases: unit["aliases"] as! [String], shortname: unit["shortname"] as! String, isBase: unit["isBase"] as! Bool, ratio: unit["ratio"] as! Int, unitType: unit["unitType"] as! Int, unitSystemId: unit["unitSystemId"] as! Int)
+            allUnits.append(newUnit)
+        }
+        
+        return allUnits
+    
+    }
+
+    private static let unitSystems = [
         [
             "name": "International System",
             "id": 0,
@@ -25,7 +57,7 @@ class Unit {
         ]
     ]
     
-    private let units = [
+    private static let units = [
         [
             "id": 0,
             "name": "metre",
@@ -120,7 +152,7 @@ class Unit {
     
     // http://www.worldwidemetric.com/measurements.html
     
-    private let unitTypes = [
+    private static let unitTypes = [
         
         [
             "id": 0,
@@ -154,11 +186,6 @@ class Unit {
         
     ]
     
-    init() {
-        
-        
-        
-    }
     
     
 }

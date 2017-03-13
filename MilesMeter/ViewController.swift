@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var cellReuseIdentifier = "searchTableCell"
     fileprivate var filteredCandies = [Candy]()
+    fileprivate var units = Unit.getUnits()
     
     fileprivate let candies = [
         Candy(category:"Chocolate", name:"Chocolate Bar"),
@@ -90,16 +91,23 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: Table View delegate functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        /*
         if searchController.isActive && searchController.searchBar.text != "" {
             return filteredCandies.count
         }
         return candies.count
+        */
+        
+        return units.count
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) else {
             return UITableViewCell()
         }
+        
+        /*
         
         let candy: Candy
         if searchController.isActive && searchController.searchBar.text != "" {
@@ -110,6 +118,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.textLabel?.text = candy.name
         cell.detailTextLabel?.text = candy.category
+        */
+        
+        let unit = units[indexPath.row]
+        cell.textLabel?.text = unit.name
+        cell.detailTextLabel?.text = unit.shortname
+
+ 
         return cell
         
     }
