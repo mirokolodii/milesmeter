@@ -16,9 +16,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     fileprivate let searchController = UISearchController(searchResultsController: nil)
-    fileprivate var cellReuseIdentifier = "searchTableCell"
+    fileprivate let cellReuseIdentifier = "searchTableCell"
+    fileprivate let resultsVCIdentifier = "resultsViewController"
     fileprivate var filteredCandies = [Candy]()
-    fileprivate var units = Unit.getUnits()
+    fileprivate let units = Unit.getUnits()
     
     fileprivate let candies = [
         Candy(category:"Chocolate", name:"Chocolate Bar"),
@@ -100,6 +101,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         return units.count
     
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,11 +123,23 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         */
         
         let unit = units[indexPath.row]
-        cell.textLabel?.text = unit.name
+        var title = unit.name
+        let upperCased = String(title[title.startIndex]).uppercased()
+        title.replaceSubrange(title.startIndex...title.startIndex, with: upperCased)
+        
+        cell.textLabel?.text = title
         cell.detailTextLabel?.text = unit.shortname
 
  
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let unitId = indexPath.row
+        
+        let resultsVC = storyboard?.instantiateViewController(withIdentifier: resultsVCIdentifier)
+        navigationController?.pushViewController(resultsVC!, animated: true)
         
     }
 }

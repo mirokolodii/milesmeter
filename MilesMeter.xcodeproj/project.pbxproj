@@ -15,6 +15,7 @@
 		110FBE9E1E698A4D0050DA77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 110FBE9C1E698A4D0050DA77 /* LaunchScreen.storyboard */; };
 		110FBEA61E698A8D0050DA77 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FBEA51E698A8D0050DA77 /* Unit.swift */; };
 		110FBEC61E7017310050DA77 /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FBEC51E7017310050DA77 /* Candy.swift */; };
+		110FBEC81E850E000050DA77 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FBEC71E850E000050DA77 /* ResultsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		110FBE9F1E698A4D0050DA77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		110FBEA51E698A8D0050DA77 /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 		110FBEC51E7017310050DA77 /* Candy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candy.swift; sourceTree = "<group>"; };
+		110FBEC71E850E000050DA77 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				110FBE901E698A4D0050DA77 /* AppDelegate.swift */,
 				110FBE921E698A4D0050DA77 /* ViewController.swift */,
+				110FBEC71E850E000050DA77 /* ResultsViewController.swift */,
 				110FBEC51E7017310050DA77 /* Candy.swift */,
 				110FBE941E698A4D0050DA77 /* Main.storyboard */,
 				110FBE9A1E698A4D0050DA77 /* Assets.xcassets */,
@@ -151,6 +154,7 @@
 				110FBEA61E698A8D0050DA77 /* Unit.swift in Sources */,
 				110FBE931E698A4D0050DA77 /* ViewController.swift in Sources */,
 				110FBE911E698A4D0050DA77 /* AppDelegate.swift in Sources */,
+				110FBEC81E850E000050DA77 /* ResultsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
