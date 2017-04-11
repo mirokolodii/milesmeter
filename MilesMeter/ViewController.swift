@@ -136,10 +136,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let unitId = indexPath.row
+        let unitID = indexPath.row
         
-        let resultsVC = storyboard?.instantiateViewController(withIdentifier: resultsVCIdentifier)
-        navigationController?.pushViewController(resultsVC!, animated: true)
+        let resultsVC = storyboard?.instantiateViewController(withIdentifier: resultsVCIdentifier) as! ResultsViewController
+        resultsVC.unitID = unitID
+        navigationController?.pushViewController(resultsVC, animated: true)
         
     }
 }

@@ -11,21 +11,25 @@ import Foundation
 
 class Unit {
     
+    let id: Int
     let name: String
     let aliases: [String]
     let shortname: String
     let isBase: Bool
-    let ratio: Int
+    let ratio: Double
+    let convertUnitId: Int?
     let unitType: Int
     let unitSystemId: Int
     
-    init(name: String, aliases: [String], shortname: String, isBase: Bool, ratio: Int, unitType: Int, unitSystemId: Int) {
+    init(id: Int, name: String, aliases: [String], shortname: String, isBase: Bool, ratio: Double, convertUnitId: Int?, unitType: Int, unitSystemId: Int) {
         
+        self.id = id
         self.name = name
         self.aliases = aliases
         self.shortname = shortname
         self.isBase = isBase
         self.ratio = ratio
+        self.convertUnitId = convertUnitId
         self.unitType = unitType
         self.unitSystemId = unitSystemId
         
@@ -36,8 +40,20 @@ class Unit {
     static func getUnits() -> [Unit] {
         var allUnits = [Unit]()
         for unit in self.units {
-            let newUnit = Unit(name: unit["name"] as! String, aliases: unit["aliases"] as! [String], shortname: unit["shortname"] as! String, isBase: unit["isBase"] as! Bool, ratio: unit["ratio"] as! Int, unitType: unit["unitType"] as! Int, unitSystemId: unit["unitSystemId"] as! Int)
+            let newUnit = Unit(
+                id: unit["id"] as! Int,
+                name: unit["name"] as! String,
+                aliases: unit["aliases"] as! [String],
+                shortname: unit["shortname"] as! String,
+                isBase: unit["isBase"] as! Bool,
+                ratio: unit["ratio"] as! Double,
+                convertUnitId: unit["convertUnitId"] as? Int,
+                unitType: unit["unitType"] as! Int,
+                unitSystemId: unit["unitSystemId"] as! Int
+            )
+            
             allUnits.append(newUnit)
+        
         }
         
         return allUnits
@@ -57,6 +73,12 @@ class Unit {
         ]
     ]
     
+    private static let converts = [
+        [],
+        []
+    
+    ]
+    
     private static let units = [
         [
             "id": 0,
@@ -64,7 +86,8 @@ class Unit {
             "aliases": ["meter"],
             "shortname": "m",
             "isBase": true,
-            "ratio": 1,
+            "ratio": 0.3048,
+            "convertUnitId": 1,
             "unitType": 0,
             "unitSystemId": 0
         ],
@@ -75,7 +98,8 @@ class Unit {
             "aliases": ["feet"],
             "shortname": "ft",
             "isBase": true,
-            "ratio": 1,
+            "ratio": 3.28084,
+            "convertUnitId": 0,
             "unitType": 0,
             "unitSystemId": 1
         ],
@@ -86,7 +110,7 @@ class Unit {
             "aliases": ["inches"],
             "shortname": "in",
             "isBase": false,
-            "ratio": 12,
+            "ratio": 12.0,
             "unitType": 0,
             "unitSystemId": 1
         ],
@@ -97,7 +121,7 @@ class Unit {
             "aliases": ["yardes"],
             "shortname": "yd",
             "isBase": false,
-            "ratio": 1/3,
+            "ratio": 1.0/3.0,
             "unitType": 0,
             "unitSystemId": 1
         ],
@@ -108,7 +132,7 @@ class Unit {
             "aliases": ["chains"],
             "shortname": "ch",
             "isBase": false,
-            "ratio": 1/66,
+            "ratio": 1.0/66.0,
             "unitType": 0,
             "unitSystemId": 1
         ],
@@ -119,7 +143,7 @@ class Unit {
             "aliases": ["miles"],
             "shortname": "ml",
             "isBase": false,
-            "ratio": 1/5280,
+            "ratio": 1.0/5280.0,
             "unitType": 0,
             "unitSystemId": 1
         ],
@@ -130,7 +154,7 @@ class Unit {
             "aliases": [],
             "shortname": "",
             "isBase": false,
-            "ratio": 1/608,
+            "ratio": 1.0/608.0,
             "unitType": 0,
             "unitSystemId": 1
         ],
@@ -141,7 +165,7 @@ class Unit {
             "aliases": [],
             "shortname": "",
             "isBase": false,
-            "ratio": 1/6080,
+            "ratio": 1.0/6080.0,
             "unitType": 0,
             "unitSystemId": 1
         ]

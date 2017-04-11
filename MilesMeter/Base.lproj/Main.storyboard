@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="1076" y="121.88905547226388"/>
         </scene>
-        <!--View Controller-->
+        <!--Results View Controller-->
         <scene sceneID="h8g-7O-OEP">
             <objects>
-                <viewController storyboardIdentifier="resultsViewController" id="xYi-X8-zm0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="resultsViewController" id="xYi-X8-zm0" customClass="ResultsViewController" customModule="MilesMeter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nhr-9X-5m8"/>
                         <viewControllerLayoutGuide type="bottom" id="cFu-38-5wd"/>
