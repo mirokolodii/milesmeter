@@ -18,20 +18,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate let cellReuseIdentifier = "searchTableCell"
     fileprivate let resultsVCIdentifier = "resultsViewController"
-    fileprivate var filteredCandies = [Candy]()
     fileprivate let units = Unit.getUnits()
+    fileprivate var filteredUnits = [Unit]()
     
-    fileprivate let candies = [
-        Candy(category:"Chocolate", name:"Chocolate Bar"),
-        Candy(category:"Chocolate", name:"Chocolate Chip"),
-        Candy(category:"Chocolate", name:"Dark Chocolate"),
-        Candy(category:"Hard", name:"Lollipop"),
-        Candy(category:"Hard", name:"Candy Cane"),
-        Candy(category:"Hard", name:"Jaw Breaker"),
-        Candy(category:"Other", name:"Caramel"),
-        Candy(category:"Other", name:"Sour Chew"),
-        Candy(category:"Other", name:"Gummi Bear")
-    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,27 +40,38 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     
     
-        // MARK:Helpers
-    
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
+    // MARK:Helpers
+    func filterContentForSearchText(searchText: String) {
+        
+        // Filter results according to user's input
+        filteredUnits = units.filter { unit in
+            return unit.name.lowercased().contains(searchText.lowercased())
+        }
+        
+        tableView.reloadData()
+        
+        
+        /*
         filteredCandies = candies.filter { candy in
             let categoryMatch = (scope == "All") || (candy.category == scope)
             return categoryMatch && candy.name.lowercased().contains(searchText.lowercased())
         }
         
         tableView.reloadData()
-        
+        */
     }
     
     
-
-
 }
 
 extension ViewController: UISearchResultsUpdating {
     
     // MARK: SearhTab delegate functions
     func updateSearchResults(for searchController: UISearchController) {
+        
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+        
+        /*
         let searchBar = searchController.searchBar
         
         if let titles = searchBar.scopeButtonTitles {
@@ -82,7 +82,7 @@ extension ViewController: UISearchResultsUpdating {
         
             filterContentForSearchText(searchText: searchController.searchBar.text!)
         }
-        
+        */
         
         
     }
@@ -99,7 +99,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return candies.count
         */
         
-        return units.count
+        return filteredUnits.count
     
     
     }
@@ -122,7 +122,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.detailTextLabel?.text = candy.category
         */
         
-        let unit = units[indexPath.row]
+        let unit = filteredUnits[indexPath.row]
         var title = unit.name
         let upperCased = String(title[title.startIndex]).uppercased()
         title.replaceSubrange(title.startIndex...title.startIndex, with: upperCased)
@@ -130,7 +130,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = title
         cell.detailTextLabel?.text = unit.shortname
 
- 
         return cell
         
     }
@@ -145,11 +144,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+        //filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
     
-    
-    
 }
+ 
+
+    
+
