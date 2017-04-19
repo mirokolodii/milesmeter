@@ -43,12 +43,25 @@ class Brain {
                 baseValue = value * currentUnit.ratio
             }
             
-            let convertBaseValue = baseValue * currentBaseUnit.ratio
+            let convertBaseValue = baseValue / currentBaseUnit.ratio
             
             // Prepare dictionary to return back to view controller
-            calculatedValuesDics.append([convertBaseUnit.name: String(convertBaseValue)])
+            
+            // Base unit goes first
+            calculatedValuesDics.append([
+                
+                "name": convertBaseUnit.name,
+                "value": String(convertBaseValue)
+                
+                ])
+            
+            // Other units from the same unit type follow
             for unit in convertUnits {
-                calculatedValuesDics.append([unit.name: String(unit.ratio * convertBaseValue)])
+                
+                calculatedValuesDics.append([
+                    "name": unit.name,
+                    "value": String(convertBaseValue * unit.ratio)
+                ])
             }
             
             

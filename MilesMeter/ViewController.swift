@@ -20,6 +20,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     fileprivate let resultsVCIdentifier = "resultsViewController"
     fileprivate let units = Unit.getUnits()
     fileprivate var filteredUnits = [Unit]()
+    fileprivate var userIsTyping = false
+    fileprivate var results = [[String: String]]()
+    fileprivate let brain = Brain()
     
     
     override func viewDidLoad() {
@@ -62,6 +65,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    
+    
 }
 
 extension ViewController: UISearchResultsUpdating {
@@ -69,6 +74,7 @@ extension ViewController: UISearchResultsUpdating {
     // MARK: SearhTab delegate functions
     func updateSearchResults(for searchController: UISearchController) {
         
+        userIsTyping = true
         filterContentForSearchText(searchText: searchController.searchBar.text!)
         
         /*
@@ -99,7 +105,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return candies.count
         */
         
-        return filteredUnits.count
+        if userIsTyping {
+            return filteredUnits.count
+        } else {
+            print(results.count)
+            return results.count
+        }
+        
     
     
     }
@@ -109,37 +121,42 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        /*
-        
-        let candy: Candy
-        if searchController.isActive && searchController.searchBar.text != "" {
-            candy = filteredCandies[indexPath.row]
+        if userIsTyping {
+            
+            let unit = filteredUnits[indexPath.row]
+            var title = unit.name
+            let upperCased = String(title[title.startIndex]).uppercased()
+            title.replaceSubrange(title.startIndex...title.startIndex, with: upperCased)
+            
+            cell.textLabel?.text = title
+            cell.detailTextLabel?.text = unit.shortname
+            
+            return cell
+            
         } else {
-            candy = candies[indexPath.row]
+            
+            let result = results[indexPath.row]
+            cell.textLabel?.text = result["name"]
+            cell.detailTextLabel?.text = result["value"]
+            return cell
         }
         
-        cell.textLabel?.text = candy.name
-        cell.detailTextLabel?.text = candy.category
-        */
-        
-        let unit = filteredUnits[indexPath.row]
-        var title = unit.name
-        let upperCased = String(title[title.startIndex]).uppercased()
-        title.replaceSubrange(title.startIndex...title.startIndex, with: upperCased)
-        
-        cell.textLabel?.text = title
-        cell.detailTextLabel?.text = unit.shortname
-
-        return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let unitID = indexPath.row
+        userIsTyping = false
+        let unitID = filteredUnits[indexPath.row].id
+        guard let value = valueTextField.text, let doubleValue = Double(value) else {
+            // No value provided by a user in text field
+            return
+        }
         
-        let resultsVC = storyboard?.instantiateViewController(withIdentifier: resultsVCIdentifier) as! ResultsViewController
-        resultsVC.unitID = unitID
-        navigationController?.pushViewController(resultsVC, animated: true)
+        self.results = brain.getConvertedUnits(unitID: unitID, value: doubleValue)
+        print(results)
+        
+        
+        tableView.reloadData()
         
     }
 }

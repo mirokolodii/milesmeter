@@ -18,10 +18,10 @@ class Unit {
     let isBase: Bool
     let ratio: Double
     let convertUnitId: Int?
-    let unitType: Int
-    let unitSystemId: Int
+    let unitType: UnitType
+    let unitSystem: UnitSystem
     
-    init(id: Int, name: String, aliases: [String], shortname: String, isBase: Bool, ratio: Double, convertUnitId: Int?, unitType: Int, unitSystemId: Int) {
+    init(id: Int, name: String, aliases: [String], shortname: String, isBase: Bool, ratio: Double, convertUnitId: Int?, unitType: UnitType, unitSystem: UnitSystem) {
         
         self.id = id
         self.name = name
@@ -31,7 +31,7 @@ class Unit {
         self.ratio = ratio
         self.convertUnitId = convertUnitId
         self.unitType = unitType
-        self.unitSystemId = unitSystemId
+        self.unitSystem = unitSystem
         
         
     }
@@ -48,8 +48,8 @@ class Unit {
                 isBase: unit["isBase"] as! Bool,
                 ratio: unit["ratio"] as! Double,
                 convertUnitId: unit["convertUnitId"] as? Int,
-                unitType: unit["unitType"] as! Int,
-                unitSystemId: unit["unitSystemId"] as! Int
+                unitType: unit["unitType"] as! UnitType,
+                unitSystem: unit["unitSystem"] as! UnitSystem
             )
             
             allUnits.append(newUnit)
@@ -60,18 +60,7 @@ class Unit {
     
     }
 
-    private static let unitSystems = [
-        [
-            "name": "International System",
-            "id": 0,
-
-        ],
-        
-        [
-            "name": "Imperial System",
-            "id": 1
-        ]
-    ]
+    
     
     private static let converts = [
         [],
@@ -80,6 +69,9 @@ class Unit {
     ]
     
     private static let units = [
+        
+        // Lenght 
+        
         [
             "id": 0,
             "name": "metre",
@@ -88,8 +80,8 @@ class Unit {
             "isBase": true,
             "ratio": 0.3048,
             "convertUnitId": 1,
-            "unitType": 0,
-            "unitSystemId": 0
+            "unitType": UnitType.length,
+            "unitSystem": UnitSystem.international
         ],
         
         [
@@ -100,8 +92,8 @@ class Unit {
             "isBase": true,
             "ratio": 3.28084,
             "convertUnitId": 0,
-            "unitType": 0,
-            "unitSystemId": 1
+            "unitType": UnitType.length,
+            "unitSystem": UnitSystem.imperial
         ],
         
         [
@@ -111,8 +103,8 @@ class Unit {
             "shortname": "in",
             "isBase": false,
             "ratio": 12.0,
-            "unitType": 0,
-            "unitSystemId": 1
+            "unitType": UnitType.length,
+            "unitSystem": UnitSystem.imperial
         ],
         
         [
@@ -122,8 +114,8 @@ class Unit {
             "shortname": "yd",
             "isBase": false,
             "ratio": 1.0/3.0,
-            "unitType": 0,
-            "unitSystemId": 1
+            "unitType": UnitType.length,
+            "unitSystem": UnitSystem.imperial
         ],
         
         [
@@ -133,8 +125,8 @@ class Unit {
             "shortname": "ch",
             "isBase": false,
             "ratio": 1.0/66.0,
-            "unitType": 0,
-            "unitSystemId": 1
+            "unitType": UnitType.length,
+            "unitSystem": UnitSystem.imperial
         ],
         
         [
@@ -144,8 +136,8 @@ class Unit {
             "shortname": "ml",
             "isBase": false,
             "ratio": 1.0/5280.0,
-            "unitType": 0,
-            "unitSystemId": 1
+            "unitType": UnitType.length,
+            "unitSystem": UnitSystem.imperial
         ],
         
         [
@@ -155,8 +147,8 @@ class Unit {
             "shortname": "",
             "isBase": false,
             "ratio": 1.0/608.0,
-            "unitType": 0,
-            "unitSystemId": 1
+            "unitType": UnitType.length,
+            "unitSystem": UnitSystem.imperial
         ],
         
         [
@@ -166,8 +158,32 @@ class Unit {
             "shortname": "",
             "isBase": false,
             "ratio": 1.0/6080.0,
-            "unitType": 0,
-            "unitSystemId": 1
+            "unitType": UnitType.length,
+            "unitSystem": UnitSystem.imperial
+        ],
+        
+        
+        // Area
+        [
+            "id": 8,
+            "name": "are",
+            "aliases": [],
+            "shortname": "are",
+            "isBase": true,
+            "ratio": 1.0/100.0,
+            "unitType": UnitType.area,
+            "unitSystem": UnitSystem.are
+        ],
+        
+        [
+            "id": 9,
+            "name": "hectare",
+            "aliases": [],
+            "shortname": "",
+            "isBase": false,
+            "ratio": 1.0/100.0,
+            "unitType": UnitType.area,
+            "unitSystem": UnitSystem.are
         ]
 
     
@@ -176,6 +192,39 @@ class Unit {
     
     // http://www.worldwidemetric.com/measurements.html
     
+    enum UnitType {
+        case length
+        case area
+        case volume
+        case temperature
+        case pressure
+        case weight
+        case density
+        case time
+    }
+    
+    enum UnitSystem {
+        case international
+        case imperial
+        case are
+    }
+    
+    /*
+     
+     private static let unitSystems = [
+     [
+     "name": "International System",
+     "id": 0,
+     
+     ],
+     
+     [
+     "name": "Imperial System",
+     "id": 1
+     ]
+     ]
+     
+     
     private static let unitTypes = [
         
         [
@@ -210,7 +259,8 @@ class Unit {
         
     ]
     
-    
+ */
     
 }
+ 
 
