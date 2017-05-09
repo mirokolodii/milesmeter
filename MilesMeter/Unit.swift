@@ -92,7 +92,7 @@ extension LengthUnits {
 			.aliases: ["centimeter", "cm"],
 			.unitSystem: UnitSystem.international,
 			.isBase: false,
-			.ratio: 1e-2,
+			.ratio: 1.0e-2,
 			.unitType: UnitType.length
 		],
 		
@@ -101,7 +101,7 @@ extension LengthUnits {
 			.aliases: ["millimeter", "mm"],
 			.unitSystem: UnitSystem.international,
 			.isBase: false,
-			.ratio: 1e-3,
+			.ratio: 1.0e-3,
 			.unitType: UnitType.length
 		],
 		
@@ -110,7 +110,7 @@ extension LengthUnits {
 			.aliases: ["micrometer"],
 			.unitSystem: UnitSystem.international,
 			.isBase: false,
-			.ratio: 1e-6,
+			.ratio: 1.0e-6,
 			.unitType: UnitType.length
 		],
 		
@@ -119,7 +119,7 @@ extension LengthUnits {
 			.aliases: ["decimeter", "dm"],
 			.unitSystem: UnitSystem.international,
 			.isBase: false,
-			.ratio: 1e-1,
+			.ratio: 1.0e-1,
 			.unitType: UnitType.length
 		],
 		
@@ -128,7 +128,7 @@ extension LengthUnits {
 			.aliases: ["kilometer", "km"],
 			.unitSystem: UnitSystem.international,
 			.isBase: false,
-			.ratio: 1e3,
+			.ratio: 1.0e3,
 			.unitType: UnitType.length
 		],
 		
@@ -137,7 +137,7 @@ extension LengthUnits {
 			.aliases: ["decameter"],
 			.unitSystem: UnitSystem.international,
 			.isBase: false,
-			.ratio: 1e1,
+			.ratio: 1.0e1,
 			.unitType: UnitType.length
 		],
 		
@@ -146,7 +146,7 @@ extension LengthUnits {
 			.aliases: ["hectometer"],
 			.unitSystem: UnitSystem.international,
 			.isBase: false,
-			.ratio: 1e2,
+			.ratio: 1.0e2,
 			.unitType: UnitType.length
 		],
 		
@@ -227,7 +227,7 @@ extension LengthUnits {
 			.aliases: [],
 			.unitSystem: UnitSystem.nonSI,
 			.isBase: false,
-			.ratio: 1e-15,
+			.ratio: 1.0e-15,
 			.unitType: UnitType.length
 		],
 		
@@ -236,7 +236,7 @@ extension LengthUnits {
 			.aliases: [],
 			.unitSystem: UnitSystem.nonSI,
 			.isBase: false,
-			.ratio: 1e-6,
+			.ratio: 1.0e-6,
 			.unitType: UnitType.length
 		]
 	]

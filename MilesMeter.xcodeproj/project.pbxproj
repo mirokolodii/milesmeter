@@ -13,7 +13,6 @@
 		110FBE991E698A4D0050DA77 /* MilesMeter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 110FBE971E698A4D0050DA77 /* MilesMeter.xcdatamodeld */; };
 		110FBE9B1E698A4D0050DA77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 110FBE9A1E698A4D0050DA77 /* Assets.xcassets */; };
 		110FBE9E1E698A4D0050DA77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 110FBE9C1E698A4D0050DA77 /* LaunchScreen.storyboard */; };
-		110FBEA61E698A8D0050DA77 /* Unit_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FBEA51E698A8D0050DA77 /* Unit_old.swift */; };
 		110FBEC81E850E000050DA77 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FBEC71E850E000050DA77 /* ResultsViewController.swift */; };
 		110FBECA1E850FA90050DA77 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110FBEC91E850FA90050DA77 /* Brain.swift */; };
 		1151632E1EC08AB300C40400 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1151632D1EC08AB300C40400 /* Unit.swift */; };
@@ -28,7 +27,6 @@
 		110FBE9A1E698A4D0050DA77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		110FBE9D1E698A4D0050DA77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		110FBE9F1E698A4D0050DA77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		110FBEA51E698A8D0050DA77 /* Unit_old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit_old.swift; sourceTree = "<group>"; };
 		110FBEC71E850E000050DA77 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		110FBEC91E850FA90050DA77 /* Brain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		1151632D1EC08AB300C40400 /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 				110FBE9C1E698A4D0050DA77 /* LaunchScreen.storyboard */,
 				110FBE9F1E698A4D0050DA77 /* Info.plist */,
 				110FBE971E698A4D0050DA77 /* MilesMeter.xcdatamodeld */,
-				110FBEA51E698A8D0050DA77 /* Unit_old.swift */,
 				1151632D1EC08AB300C40400 /* Unit.swift */,
 				110FBEC91E850FA90050DA77 /* Brain.swift */,
 			);
@@ -153,7 +150,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				110FBE991E698A4D0050DA77 /* MilesMeter.xcdatamodeld in Sources */,
-				110FBEA61E698A8D0050DA77 /* Unit_old.swift in Sources */,
 				110FBE931E698A4D0050DA77 /* ViewController.swift in Sources */,
 				110FBECA1E850FA90050DA77 /* Brain.swift in Sources */,
 				1151632E1EC08AB300C40400 /* Unit.swift in Sources */,

@@ -129,7 +129,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             title.replaceSubrange(title.startIndex...title.startIndex, with: upperCased)
             
             cell.textLabel?.text = title
-            cell.detailTextLabel?.text = unit.shortname
+            cell.detailTextLabel?.text = unit.name
             
             return cell
             
@@ -146,13 +146,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         userIsTyping = false
-        let unitID = filteredUnits[indexPath.row].id
+        let unitIndex = indexPath.row
         guard let value = valueTextField.text, let doubleValue = Double(value) else {
             // No value provided by a user in text field
             return
         }
         
-        self.results = brain.getConvertedUnits(unitID: unitID, value: doubleValue)
+        self.results = brain.getConvertedUnits(unitIndex: unitIndex, value: doubleValue)
         print(results)
         
         
