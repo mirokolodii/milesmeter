@@ -12,9 +12,7 @@ import Foundation
 class Brain {
     
     enum BrainError: Error {
-        case noCurrentBaseUnit
-        case noConvertBaseUnitId
-        case noConvertBaseUnit
+        case noBaseUnit
     }
     
     func getConvertedUnits(unitID: Int, value: Double) -> [[String: String]] {
@@ -22,103 +20,69 @@ class Brain {
         
         let units = Unit.getUnits()
         let currentUnit = units[unitID]
-        var calculatedValuesDics = [[String: String]]()
+        var calculatedValues = [[String: String]]()
         
         
         do {
-            // Get base unit for current unit
-            let currentBaseUnit = try getCurrentBaseUnit(currentUnit, units: units)
-            
-            // Get convert base unit
-            let convertBaseUnit = try getConvertBaseUnit(currentBaseUnit, units: units)
+            // Get Base unit for current unit type
+            let baseUnit = try getBaseUnit(currentUnit, all: units)
             
             // Get other units of the same Unit system as convertBaseUnit
-            let convertUnits = units.filter() {$0.unitSystemId == convertBaseUnit.unitSystemId && !$0.isBase }
+            let unitsWithSameUnitType = units.filter() {$0.unitType == baseUnit.unitType && !$0.isBase }
             
             // Calculate values
-            let baseValue: Double
-            if currentUnit.isBase {
-                baseValue = value
-            } else {
-                baseValue = value * currentUnit.ratio
-            }
-            
-            let convertBaseValue = baseValue / currentBaseUnit.ratio
-            
-            // Prepare dictionary to return back to view controller
-            
             // Base unit goes first
-            calculatedValuesDics.append([
+            let baseValue = value * currentUnit.ratio
+            
+            calculatedValues.append([
                 
-                "name": convertBaseUnit.name,
-                "value": String(convertBaseValue)
+                "name": baseUnit.name,
+                "value": String(baseValue)
                 
                 ])
             
-            // Other units from the same unit type follow
-            for unit in convertUnits {
+            // Other units from the same unit type follow next
+            for unit in unitsWithSameUnitType {
                 
-                calculatedValuesDics.append([
+                calculatedValues.append([
                     "name": unit.name,
-                    "value": String(convertBaseValue * unit.ratio)
+                    "value": String(baseValue / unit.ratio)
                 ])
             }
             
             
         // Errors handling
-        } catch BrainError.noConvertBaseUnitId {
-            print("No convert unit id record in base unit.")
+        } catch BrainError.noBaseUnit {
+            print("Can't identify base unit for current unit type. Must be error in database data or in code.")
         
-        } catch BrainError.noConvertBaseUnit {
-            print("Can't identify convert base unit from provided ID.")
-        
-        } catch BrainError.noCurrentBaseUnit  {
-            print("Can't identify base unit for current unit. Error in database data or in code.")
         } catch {
             print("Some other error, which is not thrown in code. Is it possible that it has been catched?")
         }
     
-        return calculatedValuesDics
+        return calculatedValues
     }
     
-    private func getCurrentBaseUnit(_ currentUnit: Unit, units: [Unit]) throws -> Unit {
+    private func getBaseUnit(_ currentUnit: Unit, all units: [Unit]) throws -> Unit {
         if currentUnit.isBase {
             return currentUnit
+        
         } else {
             
-            
-            let currentBaseUnitsArray = units.filter {
-                $0.isBase && ($0.unitSystemId == currentUnit.unitSystemId)
+            let arrayWithBaseUnit = units.filter {
+                $0.isBase && ($0.unitType == currentUnit.unitType)
             }
             
-            // Should only get one member in this array, otherwise db data is not correct
-            if !(currentBaseUnitsArray.isEmpty || currentBaseUnitsArray.count > 1) {
+            // Should only have one member in this array, otherwise db data is not correct
+            if !(arrayWithBaseUnit.isEmpty || arrayWithBaseUnit.count > 1) {
             
-                return currentBaseUnitsArray[0]
+                return arrayWithBaseUnit.first!
             
             } else {
-                throw BrainError.noCurrentBaseUnit
+                throw BrainError.noBaseUnit
                 
             }
         }
     }
-    
-    private func getConvertBaseUnit(_ currentBaseUnit: Unit, units: [Unit]) throws -> Unit {
-        
-        // Get convert base unit ID
-        guard let convertUnitId = currentBaseUnit.convertUnitId else {
-            throw BrainError.noConvertBaseUnitId
-        }
-        
-        // Get convert base unit from ID
-        let convertBaseUnitArray = units.filter() {$0.id == convertUnitId}
-        guard convertBaseUnitArray.count == 1 else {
-            throw BrainError.noConvertBaseUnit
-        }
-        return convertBaseUnitArray[0]
-        
-    }
-    
     
     
 }

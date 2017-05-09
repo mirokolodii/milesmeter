@@ -55,8 +55,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         
         /*
-        filteredCandies = candies.filter { candy in
-            let categoryMatch = (scope == "All") || (candy.category == scope)
+        filteredCandies: candies.filter { candy in
+            let categoryMatch: (scope:= "All") || (candy.category:= scope)
             return categoryMatch && candy.name.lowercased().contains(searchText.lowercased())
         }
         
@@ -78,10 +78,10 @@ extension ViewController: UISearchResultsUpdating {
         filterContentForSearchText(searchText: searchController.searchBar.text!)
         
         /*
-        let searchBar = searchController.searchBar
+        let searchBar: searchController.searchBar
         
-        if let titles = searchBar.scopeButtonTitles {
-            let scope = titles[searchBar.selectedScopeButtonIndex]
+        if let titles: searchBar.scopeButtonTitles {
+            let scope: titles[searchBar.selectedScopeButtonIndex]
             filterContentForSearchText(searchText: searchController.searchBar.text!, scope: scope)
         
         } else {
