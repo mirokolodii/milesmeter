@@ -15,11 +15,10 @@ class Brain {
         case noBaseUnit
     }
     
-    func getConvertedUnits(unitIndex: Int, value: Double) -> [[String: String]] {
+    func getConvertedUnits(_ currentUnit: Unit, value: Double) -> [[String: String]] {
         
         
         let units = Unit.getUnits()
-        let currentUnit = units[unitIndex]
         var calculatedValues = [[String: String]]()
         
         

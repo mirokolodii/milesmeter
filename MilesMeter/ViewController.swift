@@ -8,11 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController {
 
     // MARK: Outlets
     @IBOutlet weak var valueTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var containerView: UIView!
+    
+    // Constraints
+    @IBOutlet weak var heightPropotionForValueTextFieldConstraint: NSLayoutConstraint!
+    
     
     // MARK: Properties
     fileprivate let searchController = UISearchController(searchResultsController: nil)
@@ -34,11 +39,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         // Initialize SearchController
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = true
+        searchController.hidesNavigationBarDuringPresentation = false
+        // definesPresentationContext = false
         tableView.tableHeaderView = searchController.searchBar
-        // searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
+        searchController.searchBar.scopeButtonTitles = []
         searchController.searchBar.delegate = self
+        
+        // Change style of Value TextField
+        /*
+        valueTextField.backgroundColor = UIColor.yellow
+        valueTextField.layer.borderWidth = 2
+        valueTextField.layer.cornerRadius = 10
+        valueTextField.layer.shadowRadius = 5
+        valueTextField.layer.shadowColor = UIColor.red.cgColor
+        valueTextField.layer.borderColor = UIColor.brown.cgColor
+        */
+        
+        containerView.layer.borderWidth = 2
+        containerView.layer.cornerRadius = 10
+        containerView.layer.borderColor = UIColor.brown.cgColor
+        
     }
 
     
@@ -108,7 +129,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         if userIsTyping {
             return filteredUnits.count
         } else {
-            print(results.count)
+            // print(results.count)
             return results.count
         }
         
@@ -146,14 +167,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         userIsTyping = false
-        let unitIndex = indexPath.row
+        let currentUnit = filteredUnits[indexPath.row]
         guard let value = valueTextField.text, let doubleValue = Double(value) else {
             // No value provided by a user in text field
             return
         }
         
-        self.results = brain.getConvertedUnits(unitIndex: unitIndex, value: doubleValue)
-        print(results)
+        self.results = brain.getConvertedUnits(currentUnit, value: doubleValue)
+        // print(results)
         
         
         tableView.reloadData()
@@ -166,6 +187,11 @@ extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         //filterContentForSearchText(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
+    
+}
+
+extension ViewController: UITextFieldDelegate {
+    
     
 }
  

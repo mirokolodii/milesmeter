@@ -209,7 +209,7 @@ extension LengthUnits {
 			.aliases: [],
 			.unitSystem: UnitSystem.imperial,
 			.isBase: false,
-			.ratio: 1852,
+			.ratio: 1852.0,
 			.unitType: UnitType.length
 		],
 		
@@ -218,7 +218,7 @@ extension LengthUnits {
 			.aliases: [],
 			.unitSystem: UnitSystem.imperial,
 			.isBase: false,
-			.ratio: 5556,
+			.ratio: 5556.0,
 			.unitType: UnitType.length
 		],
 		

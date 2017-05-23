@@ -22,13 +22,13 @@ class ResultsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        /*
         guard let unitID = unitID else {
             print("Can't get unit ID")
             return
         }
-        
-        convertedValues = brain.getConvertedUnits(unitIndex: unitID, value: value)
+        */
+        // convertedValues = brain.getConvertedUnits(unitID, value: value)
 
         // Do any additional setup after loading the view.
     }
